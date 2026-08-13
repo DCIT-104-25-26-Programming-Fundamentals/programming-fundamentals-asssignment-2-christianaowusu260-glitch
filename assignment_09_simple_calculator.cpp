@@ -73,3 +73,125 @@
 #include <cmath>
 using namespace std;
 
+double add(double firstNumber, double secondNumber) {
+    return firstNumber + secondNumber;
+}
+
+double subtract(double firstNumber, double secondNumber) {
+    return firstNumber - secondNumber;
+}
+
+double multiply(double firstNumber, double secondNumber) {
+    return firstNumber * secondNumber;
+}
+
+double divide(double firstNumber, double secondNumber) {
+    return firstNumber / secondNumber;
+}
+
+double modulus(double firstNumber, double secondNumber) {
+    return fmod(firstNumber, secondNumber);
+}
+
+double exponentiate(double firstNumber, double secondNumber) {
+    return pow(firstNumber, secondNumber);
+}
+
+void displayMenu() {
+    cout << "\n============================\n";
+    cout << "     SIMPLE CALCULATOR\n";
+    cout << "============================\n";
+    cout << "1. Addition\n";
+    cout << "2. Subtraction\n";
+    cout << "3. Multiplication\n";
+    cout << "4. Division\n";
+    cout << "5. Modulus\n";
+    cout << "6. Exponentiation\n";
+    cout << "7. Quit\n";
+}
+
+int main() {
+    int choice;
+    double firstNumber;
+    double secondNumber;
+    char operation;
+
+    cout << fixed << setprecision(2);
+
+    while (true) {
+        displayMenu();
+        cout << "Select an operation (1-7): ";
+
+        if (!(cin >> choice)) {
+            cout << "Error: Please enter a number from 1 to 7.\n";
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
+
+        if (choice == 7) {
+            cout << "Goodbye!\n";
+            break;
+        }
+
+        if (choice < 1 || choice > 6) {
+            cout << "Error: Invalid menu choice. Please select 1 to 7.\n";
+            continue;
+        }
+
+        cout << "Enter first number : ";
+        if (!(cin >> firstNumber)) {
+            cout << "Error: Please enter a valid number.\n";
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
+
+        cout << "Enter second number: ";
+        if (!(cin >> secondNumber)) {
+            cout << "Error: Please enter a valid number.\n";
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
+
+        if ((choice == 4 || choice == 5) && secondNumber == 0) {
+            cout << "Error: Cannot " << (choice == 4 ? "divide" : "calculate modulus")
+                 << " by zero.\n";
+            continue;
+        }
+
+        double result;
+        switch (choice) {
+            case 1:
+                result = add(firstNumber, secondNumber);
+                operation = '+';
+                break;
+            case 2:
+                result = subtract(firstNumber, secondNumber);
+                operation = '-';
+                break;
+            case 3:
+                result = multiply(firstNumber, secondNumber);
+                operation = '*';
+                break;
+            case 4:
+                result = divide(firstNumber, secondNumber);
+                operation = '/';
+                break;
+            case 5:
+                result = modulus(firstNumber, secondNumber);
+                operation = '%';
+                break;
+            default:
+                result = exponentiate(firstNumber, secondNumber);
+                operation = '^';
+        }
+
+        cout << "Result: " << firstNumber << ' ' << operation << ' ' << secondNumber
+             << " = " << result << "\n";
+    }
+
+    return 0;
+}
+
