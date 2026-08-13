@@ -55,5 +55,53 @@
 // =============================================================================
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
+
+void printTable(int number) {
+    cout << "Multiplication Table for " << number << ":\n";
+
+    for (int multiplier = 1; multiplier <= 12; ++multiplier) {
+        cout << setw(2) << number << "  x "
+             << setw(2) << multiplier << "  = "
+             << setw(3) << number * multiplier << '\n';
+    }
+}
+
+void partA() {
+    int number;
+
+    cout << "Enter a positive integer for Part A: ";
+    if (!(cin >> number) || number <= 0) {
+        cout << "Error: please enter a positive integer.\n";
+        return;
+    }
+
+    printTable(number);
+}
+
+void partB() {
+    int limit;
+
+    cout << "\nEnter a positive integer N for Part B: ";
+    if (!(cin >> limit) || limit <= 0) {
+        cout << "Error: please enter a positive integer.\n";
+        return;
+    }
+
+    for (int number = 1; number <= limit; ++number) {
+        printTable(number);
+
+        if (number < limit) {
+            cout << "---------------------------\n";
+        }
+    }
+}
+
+int main() {
+    partA();
+    partB();
+
+    return 0;
+}
 
